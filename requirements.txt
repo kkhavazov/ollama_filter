@@ -1,5 +1,5 @@
 pydantic
 ollama
 python-dotenv
-pandas
-streamlit
+streamlit==1.40.1
+pandas==2.2.3

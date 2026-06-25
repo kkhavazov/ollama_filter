@@ -26,6 +26,26 @@ services:
       - ollama
     restart: unless-stopped
 
+  dashboard:
+    build:
+      context: .            # expects Dockerfile, requirements.txt, src/ alongside this file
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./emails.db:/app/emails.db   # mount your existing SQLite file into the container
+    restart: unless-stopped
+
+  email-filter:
+    build:
+      context: .
+      dockerfile: Dockerfile.filter
+    env_file:
+      - .env
+    volumes:
+      - ./emails.db:/app/emails.db
+    restart: unless-stopped   # or "no" if it's meant to run once and exit, not loop
+
 volumes:
   ollama_data:
   openwebui_data:

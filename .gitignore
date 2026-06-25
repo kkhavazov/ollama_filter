@@ -2,3 +2,12 @@
 data/
 venv/
 __pycache__/
+
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+.git
+.gitignore
+.env
+*.db-journal
+venv/

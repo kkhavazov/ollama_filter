@@ -8,7 +8,7 @@ import streamlit as st
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-DB_PATH = "data/emails.db"
+DB_PATH = "emails.db"
 TABLE_NAME = "emails"
 
 st.set_page_config(
@@ -31,7 +31,6 @@ def load_data(db_path: str) -> pd.DataFrame:
         return pd.DataFrame()
 
     if "is_customer_request" in df.columns:
-        # SQLite stores BOOLEAN as 0/1 — make it readable
         df["is_customer_request"] = df["is_customer_request"].astype(bool)
 
     return df
@@ -147,7 +146,7 @@ display_cols = [
 
 st.dataframe(
     filtered[display_cols].sort_values(by="id", ascending=False),
-    width='stretch',
+    use_container_width=True,
     height=200,
 )
 
